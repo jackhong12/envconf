@@ -1,4 +1,5 @@
-export ZSH="/root/.oh-my-zsh"
+# this line is needed changing
+export ZSH="~/.oh-my-zsh"
 
 #ZSH_THEME="robbyrussell"
 
@@ -7,13 +8,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen theme romkatv/powerlevel10k
 antigen apply
-
-HIST_STAMPS="yyyy-mm-dd"
-
-# autojump
-[[ -s /home/jack/.autojump/etc/profile.d/autojump.sh ]] && source /home/jack/.autojump/etc/profile.d/autojump.sh
-
-bindkey ',' autosuggest-accept
 
 plugins=(
     git
@@ -26,5 +20,12 @@ plugins=(
     dirhistory
     extract
 )
+
+HIST_STAMPS="yyyy-mm-dd"
+
+# autojump
+[[ -s /home/jack/.autojump/etc/profile.d/autojump.sh ]] && source /home/jack/.autojump/etc/profile.d/autojump.sh
+
+bindkey ',' autosuggest-accept
 
 source $ZSH/oh-my-zsh.sh
