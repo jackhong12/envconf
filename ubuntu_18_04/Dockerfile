@@ -15,3 +15,8 @@ RUN git clone https://github.com/jackhong12/my-docker.git ~/my_docker && cp ~/my
 RUN apt-get install autojump
 RUN curl -L git.io/antigen > ~/antigen.zsh
 RUN exec zsh
+
+# tmux configration
+RUN git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+RUN ln -s -f .tmux/.tmux.conf
+RUN cp .tmux/.tmux.conf.local .
