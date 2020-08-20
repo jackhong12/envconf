@@ -8,6 +8,8 @@ RUN mkdir -p ~/.vim/colors && cp ~/my_vimrc/color/molokai.vim ~/.vim/colors/
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle && vim +PluginInstall +qall
 # for plugin tabular
 #RUN apt-get install exuberant-ctags 
+# copy to clipboard
+RUN apt-get install xclip -y
 
 # install oh-my-zsh
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
