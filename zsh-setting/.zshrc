@@ -1,13 +1,5 @@
-# this line is needed changing
+# TODO: Need to modify this line.
 export ZSH="~/.oh-my-zsh"
-
-#ZSH_THEME="robbyrussell"
-
-source ~/antigen.zsh
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen theme romkatv/powerlevel10k
-antigen apply
 
 plugins=(
     git
@@ -21,6 +13,16 @@ plugins=(
     extract
 )
 
+# TODO: Need to modify this line.
+source $ZSH/oh-my-zsh.sh
+
+source ~/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen theme romkatv/powerlevel10k
+antigen apply
+
+
 HIST_STAMPS="yyyy-mm-dd"
 
 # autojump
@@ -28,4 +30,3 @@ HIST_STAMPS="yyyy-mm-dd"
 
 bindkey ',' autosuggest-accept
 
-source $ZSH/oh-my-zsh.sh
