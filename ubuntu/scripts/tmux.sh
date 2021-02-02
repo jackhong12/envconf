@@ -6,13 +6,12 @@ then
     path="${HOME}/.tmux"
     rm -rf $path
     git clone https://github.com/gpakosz/.tmux.git $path > /dev/null 2>&1 || exit 1
-    ishome=true
+	conf_local="${path}/.tmux.conf.local"
 else
     path="${1}/.tmux"
-    ishome=false
+	conf_local="${1}/config/.tmux.conf.local"
 fi
 conf="${path}/.tmux.conf"
-conf_local="${path}/.tmux.conf.local"
 
 echo "
 =====================================
