@@ -10,3 +10,10 @@ git submodule update --recursive
 
 # install .tmux
 ./scripts/tmux.sh $path
+
+# install vim bundle
+vim_path="${PWD}/my_vimrc"
+./my_vimrc/install.sh $vim_path
+
+# install oh-my-zsh
+./scripts/zsh.sh

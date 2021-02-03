@@ -4,3 +4,6 @@
 [submodule "ubuntu/nerd-fonts"]
 	path = ubuntu/nerd-fonts
 	url = https://github.com/ryanoasis/nerd-fonts.git
+[submodule "ubuntu/my_vimrc"]
+	path = ubuntu/my_vimrc
+	url = git@github.com:jackhong12/my_vimrc.git
