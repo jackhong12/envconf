@@ -4,6 +4,10 @@ path=$PWD
 # pull other repo
 git submodule init
 git submodule update --recursive
+sudo apt-get update
+
+# install ssh
+./scripts/ssh.sh
 
 # install nerd font
 ./nerd-fonts/install.sh
