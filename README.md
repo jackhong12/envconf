@@ -53,3 +53,8 @@ tmux_conf_theme_left_separator_sub="\uE0B1"
 tmux_conf_theme_right_separator_main="\uE0B2"
 tmux_conf_theme_right_separator_sub="\uE0B3"
 ```
+
+## docker
+```
+sudo usermod -aG docker $USER
+```

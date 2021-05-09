@@ -1,0 +1,22 @@
+{
+	"tmux": {
+		"script": "./scripts/tmux.sh",
+		"replace": {
+		}
+	},
+	"font": {
+		"script": "./scripts/font.sh",
+		"replace": {
+		}
+	},
+	"ssh": {
+		"script": "./scripts/ssh.sh",
+		"replace": {
+		}
+	},
+	"zsh": {
+		"script": "./scripts/zsh.sh",
+		"replace": {
+		}
+	}
+}

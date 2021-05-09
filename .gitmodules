@@ -7,3 +7,9 @@
 [submodule "ubuntu/my_vimrc"]
 	path = ubuntu/my_vimrc
 	url = git@github.com:jackhong12/my_vimrc.git
+[submodule "vimrc"]
+	path = vimrc
+	url = https://github.com/jackhong12/vimrc
+[submodule ".tmux"]
+	path = .tmux
+	url = https://github.com/gpakosz/.tmux.git
