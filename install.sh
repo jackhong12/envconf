@@ -5,7 +5,10 @@ git submodule init
 git submodule update --recursive
 sudo apt-get update
 
-python3 install.py
+bash -x ./scripts/font.sh
+bash -x ./scripts/ssh.sh
+bash -x ./scripts/tmux.sh
+bash -x ./scripts/zsh.sh
 
-# for vim
-cd vimrc && python3 ../install.py
+# vim
+cd ./vimrc && bash -x ./install.sh
