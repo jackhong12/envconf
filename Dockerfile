@@ -39,4 +39,3 @@ RUN bash -x ./install.sh -mute
 
 WORKDIR /home/envc
 CMD ["zsh"]
-RUN sudo usermod --shell /bin/zsh envc

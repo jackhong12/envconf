@@ -1,11 +1,5 @@
-
-
-# basic setting
-ZSH_THEME="robbyrussell"
-
 plugins=(
     git
-    autojump
     vi-mode
     history
     colored-man-pages
@@ -13,6 +7,11 @@ plugins=(
     web-search
     dirhistory
     extract
+
+    # other plugins
+    autojump
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

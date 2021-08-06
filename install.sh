@@ -8,7 +8,7 @@ sudo apt-get update
 bash -x ./scripts/font.sh
 bash -x ./scripts/ssh.sh
 bash -x ./scripts/tmux.sh
-bash -x ./scripts/zsh.sh
+bash -x ./scripts/zsh.sh -p10k
 
 # vim
 cd ./vimrc && bash -x ./install.sh
