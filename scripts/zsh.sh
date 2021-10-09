@@ -12,9 +12,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-
-# zsh configuration
-echo "export ZSH=\"${HOME}/.oh-my-zsh\"" > ${HOME}/.zshrc
+rm -f ${HOME}/.zshrc
 
 # theme
 is_theme=false
@@ -23,14 +21,19 @@ for i in $*; do
     then
         # powerlevel10k
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-        printf "\nZSH_THEME=\"powerlevel10k/powerlevel10k\"\n\n" >> ${HOME}/.zshrc
+        printf "ZSH_THEME=\"powerlevel10k/powerlevel10k\"\n\n" >> ${HOME}/.zshrc
+        printf "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n\n" >> ${HOME}/.zshrc
         is_theme=true
+        cp ./config/zsh/.p10k.zsh ${HOME}
     fi
 done
 if [ $is_theme != true ]
 then
     printf "\nZSH_THEME=\"robbyrussell\"\n\n" >> ${HOME}/.zshrc
 fi
+
+# zsh configuration
+echo "export ZSH=\"${HOME}/.oh-my-zsh\"" >> ${HOME}/.zshrc
 
 # plusgins
 cat ./config/zsh/plugins.zsh >> ${HOME}/.zshrc

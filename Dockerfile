@@ -27,7 +27,6 @@ RUN chmod 0440 /etc/sudoers.d/envc
 RUN chown -R envc:envc /home/envc
 ENV USER=envc
 ENV HOME=/home/envc
-USER envc
 
 COPY ./config /home/envc/envconf/config
 COPY ./fonts /home/envc/envconf/fonts
@@ -35,10 +34,13 @@ COPY ./vimrc /home/envc/envconf/vimrc
 COPY ./scripts /home/envc/envconf/scripts
 COPY ./tools /home/envc/envconf/tools
 COPY ./.tmux /home/envc/envconf/.tmux
+RUN chown -R envc:envc /home/envc/envconf
+
+USER envc
 
 WORKDIR /home/envc/envconf
 RUN bash -x scripts/tmux.sh
-RUN bash -x scripts/zsh.sh
+RUN bash -x scripts/zsh.sh -p10k
 
 # set fonts
 RUN bash -x scripts/font.sh
@@ -51,4 +53,5 @@ WORKDIR /home/envc/envconf/vimrc
 RUN bash -x ./install.sh -mute
 
 WORKDIR /home/envc
-CMD ["zsh"]
+RUN sudo chsh -s /bin/zsh envc
+RUN zsh
