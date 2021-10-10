@@ -32,7 +32,6 @@ COPY ./config /home/envc/envconf/config
 COPY ./fonts /home/envc/envconf/fonts
 COPY ./vimrc /home/envc/envconf/vimrc
 COPY ./scripts /home/envc/envconf/scripts
-COPY ./tools /home/envc/envconf/tools
 COPY ./.tmux /home/envc/envconf/.tmux
 RUN chown -R envc:envc /home/envc/envconf
 
