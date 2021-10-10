@@ -53,5 +53,5 @@ WORKDIR /home/envc/envconf/vimrc
 RUN bash -x ./install.sh -mute
 
 WORKDIR /home/envc
-RUN sudo chsh -s /bin/zsh envc
-RUN zsh
+RUN sudo sed -i "s/\(envc:.*\/bin\/\)sh/\1zsh/g" /etc/passwd
+RUN script -qc "bash -c \"zsh -is <<<''\"" /dev/null
