@@ -17,6 +17,11 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
+RUN apt-get install debconf-utils -y
+RUN apt-get install dialog apt-utils -y
+RUN apt-get install keyboard-configuration -y
+RUN dpkg-reconfigure keyboard-configuration
+
 # change mirror url
 RUN sed -i 's/http:\/\/archive\.ubuntu\.com/http:\/\/free\.nchc\.org\.tw/g' /etc/apt/sources.list
 RUN sed -i 's/http:\/\/security\.ubuntu\.com/http:\/\/free\.nchc\.org\.tw/g' /etc/apt/sources.list
