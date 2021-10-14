@@ -17,8 +17,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get install debconf-utils -y
-RUN apt-get install dialog apt-utils -y
+RUN apt-get install debconf -y
 RUN apt-get install keyboard-configuration -y
 RUN dpkg-reconfigure keyboard-configuration
 
@@ -49,8 +48,6 @@ RUN bash -x scripts/zsh.sh -p10k
 # set fonts
 RUN bash -x scripts/font.sh
 RUN fc-cache -f -v
-ENV TERM=screen-256color
-ENV COLORTERM=truecolor
 
 # vim
 WORKDIR /home/envc/envconf/vimrc
