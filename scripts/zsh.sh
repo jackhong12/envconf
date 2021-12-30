@@ -16,6 +16,7 @@ rm -f ${HOME}/.zshrc
 
 # theme
 is_theme=false
+no_check=false
 for i in $*; do
     if [ $i == "-p10k" ]
     then
@@ -25,6 +26,10 @@ for i in $*; do
         printf "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n\n" >> ${HOME}/.zshrc
         is_theme=true
         cp ./config/zsh/.p10k.zsh ${HOME}
+    fi
+    if [ $i == "-no-check" ]
+    then
+        no_check=true
     fi
 done
 if [ $is_theme != true ]
@@ -41,3 +46,8 @@ cat ./config/zsh/plugins.zsh >> ${HOME}/.zshrc
 # bind autocompelet key
 printf "\nbindkey ',' autosuggest-accept	# bind autocompelet\n" >> ${HOME}/.zshrc
 
+# avoid checking
+if [ $no_check == true ]
+then
+    printf "\nDISABLE_AUTO_UPDATE=\"true\"\n\n" >> ${HOME}/.zshrc
+fi
