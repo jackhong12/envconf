@@ -43,7 +43,7 @@ USER envc
 
 WORKDIR /home/envc/envconf
 RUN bash -x scripts/tmux.sh
-RUN bash -x scripts/zsh.sh -p10k -no-check
+RUN bash -x scripts/zsh.sh -no-check
 
 # set fonts
 RUN bash -x scripts/font.sh
