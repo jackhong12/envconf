@@ -7,12 +7,14 @@ options:
     -a, --separator-arrow: use arrow symbols as separators
     -m, --mouse-on: enable mouse mode
     -n, --theme-navy: navy colour theme
+    -t, --bar-top: move status bar to the top
 "
 
 separator_arrow=false
 is_help=false
 is_mouse=false
 colour_theme='default'
+status_bar_position='down'
 for i in $*; do
     if [ $i == "-a" ] || [ $i == "--separator-arrow" ]
     then
@@ -26,6 +28,9 @@ for i in $*; do
     elif [ $i == "-n" ] || [ $i == "--theme-navy" ]
     then
         colour_theme='navy'
+    elif [ $i == "-t" ] || [ $i == "--bar-top" ]
+    then
+        status_bar_position='top'
     fi
 done
 
@@ -65,6 +70,14 @@ then
     sed -i 's/.*\(set -g mouse on\)/\1/g' ~/.tmux.conf.local
 else
     sed -i 's/.*\(set -g mouse on\)/#\1/g' ~/.tmux.conf.local
+fi
+
+# position of status bar
+if [ $status_bar_position == 'top' ]
+then
+    sed -i 's/.*\(set -g status-position top\)/\1/g' ~/.tmux.conf.local
+else
+    sed -i 's/.*\(set -g status-position top\)/#\1/g' ~/.tmux.conf.local
 fi
 
 # theme
