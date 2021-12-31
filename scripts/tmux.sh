@@ -6,11 +6,13 @@ options:
     -h, --help: show help messages
     -a, --separator-arrow: use arrow symbols as separators
     -m, --mouse-on: enable mouse mode
+    -n, --theme-navy: navy colour theme
 "
 
 separator_arrow=false
 is_help=false
 is_mouse=false
+colour_theme='default'
 for i in $*; do
     if [ $i == "-a" ] || [ $i == "--separator-arrow" ]
     then
@@ -18,9 +20,12 @@ for i in $*; do
     elif [ $i == "-h" ] || [ $i == "--help" ]
     then
         is_help=true
-    elif [ $i == "-m" ] || [ $i == "--is_mouse" ]
+    elif [ $i == "-m" ] || [ $i == "--mouse-on" ]
     then
         is_mouse=true
+    elif [ $i == "-n" ] || [ $i == "--theme-navy" ]
+    then
+        colour_theme='navy'
     fi
 done
 
@@ -60,4 +65,16 @@ then
     sed -i 's/.*\(set -g mouse on\)/\1/g' ~/.tmux.conf.local
 else
     sed -i 's/.*\(set -g mouse on\)/#\1/g' ~/.tmux.conf.local
+fi
+
+# theme
+if [ $colour_theme == 'navy' ]
+then
+    blue_theme_colour='\ntmux_conf_theme_colour_navy="#193498"\ntmux_conf_theme_colour_blue="#113cfc"\ntmux_conf_theme_colour_light_blue="#1597e5"\ntmux_conf_theme_colour_teal="#69dadb"'
+    sed -i "s/\(^tmux_conf_theme_colour_17=.*\)/\1${blue_theme_colour}/g" ~/.tmux.conf.local
+    sed -i "s/\(.*\)\(tmux_conf_theme_colour_4\)\([^=].*\)/\1tmux_conf_theme_colour_light_blue\3/g" ~/.tmux.conf.local
+    sed -i "s/\(.*\)\(tmux_conf_theme_colour_9\)\([^=].*\)/\1tmux_conf_theme_colour_teal\3/g" ~/.tmux.conf.local
+    sed -i "s/\(.*\)\(tmux_conf_theme_colour_17\)\([^=].*\)/\1tmux_conf_theme_colour_teal\3/g" ~/.tmux.conf.local
+    sed -i "s/\(.*\)\(tmux_conf_theme_colour_10\)\([^=].*\)/\1tmux_conf_theme_colour_navy\3/g" ~/.tmux.conf.local
+    sed -i "s/\(.*\)\(tmux_conf_theme_colour_16\)\([^=].*\)/\1tmux_conf_theme_colour_navy\3/g" ~/.tmux.conf.local
 fi

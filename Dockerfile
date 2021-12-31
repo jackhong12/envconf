@@ -42,7 +42,7 @@ RUN chown -R envc:envc /home/envc/envconf
 USER envc
 
 WORKDIR /home/envc/envconf
-RUN bash -x scripts/tmux.sh -a -m
+RUN bash -x scripts/tmux.sh -a -m -n
 RUN bash -x scripts/zsh.sh -p10k
 
 # set fonts
