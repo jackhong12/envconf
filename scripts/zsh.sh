@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo apt-get install git zsh wget curl -y
+sudo apt-get install net-tools -y
 sudo apt-get install powerline -y
 
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/install.sh
