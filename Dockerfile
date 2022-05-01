@@ -2,8 +2,10 @@ From ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN useradd -U -m envc && \
-    usermod -G users envc
+ENV usern envconf
+
+RUN useradd -U -m $usern && \
+    usermod -G users $usern
 RUN apt-get update && apt-get install --no-install-recommends -y \
     lsb-release \
     sudo \
@@ -26,33 +28,33 @@ RUN sed -i 's/http:\/\/archive\.ubuntu\.com/http:\/\/free\.nchc\.org\.tw/g' /etc
 RUN sed -i 's/http:\/\/security\.ubuntu\.com/http:\/\/free\.nchc\.org\.tw/g' /etc/apt/sources.list
 RUN apt-get update
 
-RUN echo "envc ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/envc
-RUN chmod 0440 /etc/sudoers.d/envc
-RUN chown -R envc:envc /home/envc
-ENV USER=envc
-ENV HOME=/home/envc
+RUN echo "$usern ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$usern
+RUN chmod 0440 /etc/sudoers.d/$usern
+RUN chown -R $usern:$usern /home/$usern
+ENV USER=$usern
+ENV HOME=/home/$usern
 
-COPY ./config /home/envc/envconf/config
-COPY ./fonts /home/envc/envconf/fonts
-COPY ./vimrc /home/envc/envconf/vimrc
-COPY ./scripts /home/envc/envconf/scripts
-COPY ./.tmux /home/envc/envconf/.tmux
-RUN chown -R envc:envc /home/envc/envconf
+COPY ./config /home/$usern/envconf/config
+COPY ./fonts /home/$usern/envconf/fonts
+COPY ./vimrc /home/$usern/envconf/vimrc
+COPY ./scripts /home/$usern/envconf/scripts
+COPY ./.tmux /home/$usern/envconf/.tmux
+RUN chown -R $usern:$usern /home/$usern/envconf
 
-USER envc
+USER $usern
 
-WORKDIR /home/envc/envconf
+WORKDIR /home/$usern/envconf
 RUN bash -x scripts/tmux.sh -a -m -n
-RUN bash -x scripts/zsh.sh -no-check
+RUN bash -x scripts/zsh.sh -no-check -p10k
 
 # set fonts
 RUN bash -x scripts/font.sh
 RUN fc-cache -f -v
 
 # vim
-WORKDIR /home/envc/envconf/vimrc
+WORKDIR /home/$usern/envconf/vimrc
 RUN bash -x ./install.sh -mute
 
-WORKDIR /home/envc
-RUN sudo sed -i "s/\(envc:.*\/bin\/\)sh/\1zsh/g" /etc/passwd
+WORKDIR /home/$usern
+RUN sudo sed -i "s/\($usern:.*\/bin\/\)sh/\1zsh/g" /etc/passwd
 RUN script -qc "bash -c \"zsh -is <<<''\"" /dev/null

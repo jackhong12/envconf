@@ -25,14 +25,14 @@ sudo apt-get install -y nvidia-docker2
 
 - build image
 ```bash
-./docker-build.sh
+./tools/docker-build.sh
 ```
 
 - run container
 ```bash
-docker run -it --rm envc_img zsh
+docker run -it --rm envconf
 # or
-./activate.sh
+envconf
 ```
 
 - install powerline fonts (optional)
