@@ -7,6 +7,7 @@ docker run -it \
     -v $(pwd):/home/envc/share \
     --gpus all \
     --network host \
+    --detach-keys="ctrl-@" \
     --privileged=true \
     envconf \
     zsh
