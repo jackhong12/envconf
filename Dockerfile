@@ -1,9 +1,10 @@
 From ubuntu:20.04
 
+################################################################################
+# first part
+################################################################################
 ARG DEBIAN_FRONTEND=noninteractive
-
 ENV usern envconf
-
 RUN useradd -U -m $usern && \
     usermod -G users $usern
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -11,7 +12,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     sudo \
     bash-completion \
     software-properties-common
+RUN sudo apt-get install git -y
 
+################################################################################
+# second part
+################################################################################
 # language setting
 RUN apt-get install -y locales
 RUN locale-gen en_US.UTF-8
@@ -33,28 +38,12 @@ RUN chmod 0440 /etc/sudoers.d/$usern
 RUN chown -R $usern:$usern /home/$usern
 ENV USER=$usern
 ENV HOME=/home/$usern
-
-COPY ./config /home/$usern/envconf/config
-COPY ./fonts /home/$usern/envconf/fonts
-COPY ./vimrc /home/$usern/envconf/vimrc
-COPY ./scripts /home/$usern/envconf/scripts
-COPY ./.tmux /home/$usern/envconf/.tmux
-RUN chown -R $usern:$usern /home/$usern/envconf
-
 USER $usern
 
-WORKDIR /home/$usern/envconf
-RUN bash -x scripts/tmux.sh -a -m -n
-RUN bash -x scripts/zsh.sh -no-check -p10k
-
-# set fonts
-RUN bash -x scripts/font.sh
-RUN fc-cache -f -v
-
-# vim
-WORKDIR /home/$usern/envconf/vimrc
-RUN bash -x ./install.sh -mute
-
 WORKDIR /home/$usern
+
+RUN git clone https://github.com/jackhong12/envconf.git
+RUN cd envconf && bash -x ./install.sh --omz-no-check
+
 RUN sudo sed -i "s/\($usern:.*\/bin\/\)sh/\1zsh/g" /etc/passwd
 RUN script -qc "bash -c \"zsh -is <<<''\"" /dev/null
