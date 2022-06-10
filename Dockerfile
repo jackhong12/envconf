@@ -4,9 +4,11 @@ From ubuntu:20.04
 # first part
 ################################################################################
 ARG DEBIAN_FRONTEND=noninteractive
-ENV usern envconf
-RUN useradd -U -m $usern && \
-    usermod -G users $usern
+ARG usern=envconf
+ARG USER_UID=1000
+ARG USER_GID=1000
+RUN groupadd --gid $USER_GID $usern
+RUN useradd --uid $USER_UID --gid $USER_GID -m $usern
 RUN apt-get update && apt-get install --no-install-recommends -y \
     lsb-release \
     sudo \
@@ -14,9 +16,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     software-properties-common
 RUN sudo apt-get install git -y
 
-################################################################################
-# second part
-################################################################################
 # language setting
 RUN apt-get install -y locales
 RUN locale-gen en_US.UTF-8
@@ -40,6 +39,9 @@ ENV USER=$usern
 ENV HOME=/home/$usern
 USER $usern
 
+################################################################################
+# second part
+################################################################################
 WORKDIR /home/$usern
 
 RUN git clone https://github.com/jackhong12/envconf.git
