@@ -9,6 +9,8 @@
 - add user to docker group
 ```bash
 sudo gpasswd -a $USER docker
+sudo usermod -aG docker $USER
+sudo reboot
 ```
 
 - install [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
