@@ -2,11 +2,22 @@
 git submodule update --init --recursive
 docker pull ubuntu:20.04
 
-IMG_NAME=envconf
+USERNAME=envconf
+LITE=docker-lite
+FULL=$USERNAME
 docker build . \
-    --build-arg usern=$IMG_NAME \
+    --file ./tools/Dockerfile.lite \
+    --build-arg usern=$USERNAME \
     --build-arg USER_UID=$(id -g $USER) \
     --build-arg USER_GID=$(id -g $USER) \
-    -t $IMG_NAME
+    -t $LITE
+
+docker build . \
+    --file ./tools/Dockerfile \
+    --build-arg usern=$USERNAME \
+    --build-arg USER_UID=$(id -g $USER) \
+    --build-arg USER_GID=$(id -g $USER) \
+    -t $FULL
 
 sudo cp ./tools/envconf /usr/bin
+sudo cp ./tools/docker-lite /usr/bin
