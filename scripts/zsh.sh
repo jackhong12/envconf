@@ -82,7 +82,10 @@ printf "\nbindkey ',' autosuggest-accept	# bind autocompelet\n" >> ${HOME}/.zshr
 # avoid updating oh-my-zsh
 if [ $no_check == true ]
 then
-    printf "\nDISABLE_AUTO_UPDATE=\"true\"\n\n" >> ${HOME}/.zshrc
+    printf "\nDISABLE_AUTO_UPDATE=\"true\"\n" >> ${HOME}/.zshrc
 else
-    printf "\n#DISABLE_AUTO_UPDATE=\"true\"\n\n" >> ${HOME}/.zshrc
+    printf "\n#DISABLE_AUTO_UPDATE=\"true\"\n" >> ${HOME}/.zshrc
 fi
+
+cp config/zsh/.alias.zsh ~/
+printf "\nsource ~/.alias.zsh\n" >> ${HOME}/.zshrc
