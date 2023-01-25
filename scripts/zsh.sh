@@ -28,11 +28,13 @@ for i in $*; do
         is_theme=true
         cp ./config/zsh/.p10k.zsh ${HOME}
     fi
+    # avoid updating oh-my-zsh
     if [ $i == "-no-check" ]
     then
         no_check=true
     fi
 done
+
 if [ $is_theme != true ]
 then
     printf "\nZSH_THEME=\"robbyrussell\"\n\n" >> ${HOME}/.zshrc
@@ -47,8 +49,10 @@ cat ./config/zsh/plugins.zsh >> ${HOME}/.zshrc
 # bind autocompelet key
 printf "\nbindkey ',' autosuggest-accept	# bind autocompelet\n" >> ${HOME}/.zshrc
 
-# avoid checking
+# avoid updating oh-my-zsh
 if [ $no_check == true ]
 then
     printf "\nDISABLE_AUTO_UPDATE=\"true\"\n\n" >> ${HOME}/.zshrc
+else
+    printf "\n#DISABLE_AUTO_UPDATE=\"true\"\n\n" >> ${HOME}/.zshrc
 fi
